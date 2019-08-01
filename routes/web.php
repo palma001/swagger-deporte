@@ -12,7 +12,8 @@
 */
 
 $router->get('/', function () use ($router) {
-    return redirect('api/swagger-demo');
+    return redirect('deportes/swagger-demo');
 });
 
 $router->get('deportes/example', 'ExampleController@index');
+$router->get('deportes/blogs', 'BlogsController@index');
