@@ -11,16 +11,34 @@ class Blog extends Base
 	 *   schema="Blogs",
 	 *   type="object",
 	 *   @OA\Property(
-	 *       property="email",
+	 *       property="title",
 	 *       required={"true"},
 	 *       type="string",
-	 *       description="The Post's email"
+	 *       description="The Blogs title"
 	 *   ),
 	 *   @OA\Property(
-	 *       property="password",
+	 *       property="description",
 	 *       type="string",
 	 *       required={"true"},
-	 *       description="The email password"
+	 *       description="The Blogs description"
+	 *   ),
+	 *   @OA\Property(
+	 *       property="category_id",
+	 *       type="number",
+	 *       required={"true"},
+	 *       description="The Blogs category"
+	 *   ),
+	 *   @OA\Property(
+	 *       property="user_id",
+	 *       type="number",
+	 *       required={"true"},
+	 *       description="The Blogs user"
+	 *   ),
+	 *   @OA\Property(
+	 *       property="image",
+	 *       type="string",
+	 *       required={"true"},
+	 *       description="The Blogs image"
 	 *   ),
 	 * )
      * The attributes that are mass assignable.
@@ -28,6 +46,6 @@ class Blog extends Base
      * @var array
      */
     protected $fillable = [
-        'blog_id', 'title', 'description', 'category_id', 'user_id', 'image', ''
+        'blog_id', 'title', 'description', 'category_id', 'user_id', 'image'
     ];
 }

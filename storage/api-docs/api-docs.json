@@ -17,7 +17,7 @@
         "/blogs": {
             "get": {
                 "tags": [
-                    "Users"
+                    "Blogs"
                 ],
                 "summary": "Lists available Users",
                 "description": "Gets all available Users resources",
@@ -30,7 +30,7 @@
                         "required": false,
                         "schema": {
                             "title": "Paginate",
-                            "description": "The unique identifier of a Post resource",
+                            "description": "The unique identifier of a Blogs resource",
                             "type": "boolean",
                             "example": "true"
                         }
@@ -38,10 +38,10 @@
                     {
                         "name": "dataSearch",
                         "in": "query",
-                        "description": "Post resource name",
+                        "description": "Blogs resource name",
                         "required": false,
                         "schema": {
-                            "description": "The unique identifier of a Post resource",
+                            "description": "The unique identifier of a Blogs resource",
                             "type": "string"
                         }
                     },
@@ -52,7 +52,7 @@
                         "required": false,
                         "schema": {
                             "title": "Title",
-                            "description": "The unique identifier of a Post resource",
+                            "description": "The unique identifier of a Blogs resource",
                             "type": "string",
                             "example": "title"
                         }
@@ -63,7 +63,7 @@
                         "description": "Sort order field",
                         "schema": {
                             "title": "sortOrder",
-                            "description": "The unique identifier of a Post resource",
+                            "description": "The unique identifier of a Blogs resource",
                             "type": "string",
                             "example": "asc"
                         }
@@ -74,7 +74,7 @@
                         "description": "Sort order field",
                         "schema": {
                             "title": "perPage",
-                            "description": "The unique identifier of a Post resource",
+                            "description": "The unique identifier of a Blogs resource",
                             "type": "number",
                             "default": "0"
                         }
@@ -107,19 +107,133 @@
                         ]
                     }
                 ]
-            }
-        },
-        "/example": {
-            "get": {
+            },
+            "post": {
                 "tags": [
-                    "Example"
+                    "Blogs"
                 ],
-                "summary": "Lists available Example",
-                "description": "Gets all available Example resources",
-                "operationId": "App\\Http\\Controllers\\ExampleController::index",
+                "summary": "Creates a new Blogs",
+                "description": "Creates a new Blogs",
+                "operationId": "App\\Http\\Controllers\\BlogsController::store",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Blogs"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "A list with Example",
+                        "description": "The Blogs resource created",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/blogs/{id}": {
+            "put": {
+                "tags": [
+                    "Blogs"
+                ],
+                "summary": "Updates a Blogs resource",
+                "description": "Updates a Blogs resource by the id",
+                "operationId": "App\\Http\\Controllers\\BlogsController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Blogs resource id",
+                        "required": true,
+                        "schema": {
+                            "description": "The unique identifier of a Blogs resource",
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Blogs"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The Blogs resource updated",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": [
+                            "*"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Blogs"
+                ],
+                "summary": "Removes a Blogs resource",
+                "description": "Removes a Blogs resource",
+                "operationId": "App\\Http\\Controllers\\BlogsController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The Blogs resource id",
+                        "required": true,
+                        "schema": {
+                            "description": "The unique identifier of a Blogs resource",
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The resource has been deleted",
                         "content": {
                             "application/json": {}
                         }
@@ -149,6 +263,46 @@
     },
     "components": {
         "schemas": {
+            "Blogs": {
+                "properties": {
+                    "title": {
+                        "description": "The Blogs title",
+                        "required": [
+                            "true"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "The Blogs description",
+                        "required": [
+                            "true"
+                        ],
+                        "type": "string"
+                    },
+                    "category_id": {
+                        "description": "The Blogs category",
+                        "required": [
+                            "true"
+                        ],
+                        "type": "number"
+                    },
+                    "user_id": {
+                        "description": "The Blogs user",
+                        "required": [
+                            "true"
+                        ],
+                        "type": "number"
+                    },
+                    "image": {
+                        "description": "The Blogs image",
+                        "required": [
+                            "true"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "Users": {
                 "properties": {
                     "name": {

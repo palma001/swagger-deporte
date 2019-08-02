@@ -15,5 +15,7 @@ $router->get('/', function () use ($router) {
     return redirect('deportes/swagger-demo');
 });
 
-$router->get('deportes/example', 'ExampleController@index');
-$router->get('deportes/blogs', 'BlogsController@index');
+$router->get('/deportes/blogs', 'BlogsController@index');
+$router->post('/deportes/blogs', 'BlogsController@store');
+$router->put('/deportes/blogs/{id}', 'BlogsController@update');
+$router->delete('/deportes/blogs/{id}', 'BlogsController@destroy');
